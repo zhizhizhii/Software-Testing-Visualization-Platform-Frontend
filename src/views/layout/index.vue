@@ -8,7 +8,7 @@
     </el-aside>
     <el-container>
       <HeadBar @changeCollapse="changeCollapse"/>
-      <el-main class="main"><router-view /></el-main>
+      <el-main style="height:100px;" class="main"><router-view /></el-main>
       <el-footer style="height:20px;font-size:12px;text-align:center;">
         软件测试可视化平台@Copyright SSE 2021</el-footer>
     </el-container>
@@ -57,6 +57,7 @@ export default {
   }
 }
 .main {
+  
   background-color: #e9eef3;
 }
 .footer{

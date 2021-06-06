@@ -89,34 +89,46 @@ request({
     .then(() => {
       let tHeader = [
   "测试用例编号",
-  "本月的通话分钟数X（分钟）",
-  "本年度至本月的累计未按时缴费的次数Y（次）",
-  "每月的电话总费用预期输出",
-  "实际输出",
-  "程序运行信息",
-  "测试结果",
+  "销售的主机数量M（台）",
+  "销售的显示器数量I（台）",
+  "销售的外设数量P（套）",
+  "预计状态（正常/错误）",
+  "预计销售额（元）",
+  "预计佣金（元）",
+  "实际状态（正常/错误）",
+  "实际销售额（元）",
+  "实际佣金（元）",
   "测试时间"
 ];
 const filterVal = [
       "id",
-      "X",
-      "Y",
-      "expectation",
-      "actual",
-      "info",
-      "test_result",
+      "M",
+      "I",
+      "P",
+      "predict",
+      "pre_amount",
+      "pre_earn",
+      "S",
+      "A",
+      "E",
       "test_time"
 ];
 const example = [
   {
     "id":"TS1",
-    "X":-1,
-    "Y":5,
-    "expectation":-1
+    "M":"50",
+    "I":"50",
+    "P":"50",
+    "predict":"正常",
+    "pre_amount":"5000",
+    "pre_earn":"1000",
+    "S":"正常",
+    "A":"5000",
+    "E":"1000"  
   }
 ]
 console.log(printExe);
-      printExe('电信收费问题模板',tHeader,filterVal,example);
+      printExe('电脑销售系统模板',tHeader,filterVal,example);
     })
     .catch(() => {});
     }

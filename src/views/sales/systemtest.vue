@@ -177,10 +177,10 @@ export default {
           res => {
             _this.tableData.forEach((item, index) => {
               let responseObject = res.data.test_result[index];
-              item.A = responseObject.actual;
-              item.S = responseObject.amount;
+              item.A = responseObject.amount;
+              item.S = responseObject.actual;
               item.E = responseObject.earn;
-              item.state = item.predcit == item.A ? true : false;
+              item.state = item.A == item.pre_amount ? true : false;
 
             _this.classState[index] = item["state"]
               ? "success-row"

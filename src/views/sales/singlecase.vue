@@ -7,7 +7,7 @@
       :model="formLabelAlign"
     >
       <el-form-item label="销售的主机数量M（台）">
-        <el-input v-model="formLabelAlign.max"></el-input>
+        <el-input v-model="formLabelAlign.M"></el-input>
       </el-form-item>
       <el-form-item label="销售的显示器数量I（台）">
         <el-input v-model="formLabelAlign.I"></el-input>
@@ -34,9 +34,11 @@
         >进行测试<i class="el-icon-upload el-icon--right"></i
       ></el-button>
         <div>
-    <span>实际输出：{{actual}}</span>
+    <span>实际状态：{{S}}</span>
     <el-divider direction="vertical"></el-divider>
-    <span>运行信息：{{info}}</span>
+    <span>实际销售额：{{A}}</span>
+    <el-divider direction="vertical"></el-divider>
+    <span>实际佣金{{E}}</span>
     <el-divider direction="vertical"></el-divider>
   </div>
   </div>
@@ -55,12 +57,12 @@ export default {
         E:"",
       labelPosition: 'right',
         formLabelAlign: {
-          M: 0,
-          I: 0,
-          P: 0,
+          M: "",
+          I: "",
+          P: "",
           predict:"正常/错误",
-          pre_amount:0,
-          pre_earn:0,
+          pre_amount:"",
+          pre_earn:"",
         }, 
         date:"",
         loading:false,

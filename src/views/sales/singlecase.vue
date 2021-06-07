@@ -75,8 +75,6 @@ export default {
   mounted() {},
   methods: {
     doTest(){
-      let year = this.date.split("-")[0];
-      let month = this.date.split("-")[1];
       let formdata = {
         id:"TS1",
         M:this.formLabelAlign.M,
@@ -87,8 +85,6 @@ export default {
         pre_earn:this.formLabelAlign.pre_earn,
       }
       let data = {
-        year,
-        month,
         sales_test_list:[formdata],
       }
       testsales(data).then((res)=>{

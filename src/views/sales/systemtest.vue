@@ -8,8 +8,7 @@
           :label="item.label"
           :value="item.value"
         />
-      </el-select>
-      <div class="data-text">测试中日期取2021年5月（共31天）</div>
+      </el-select>  
       <el-button
         class="main-button"
         type="success"
@@ -166,8 +165,6 @@ export default {
     },
     doTest() {
       let newData = {
-        year: "2021",
-        month: "12",
         sales_test_list: mock_1_json,
       };
       const _this = this;

@@ -38,7 +38,7 @@ export default{
       let formData = new FormData();
       formData.append("file",item.file);
       let config = {'Content-Type': 'multipart/form-data'};
-      console.log(item);
+      console.log("item",item);
       const request = axios.create({
     baseURL:'http://localhost:5000'
 })
@@ -47,8 +47,9 @@ request({
   config,
   data:formData,
   responseType: 'blob',
-  url:'/api/cash/upload',
+  url:'/api/sales/upload',
 }).then((res)=>{
+  console.log("1123123124");
    let url = window.URL.createObjectURL(new Blob([res.data]))
    let a = document.createElement('a')
    a.style.display = 'none'
@@ -98,33 +99,32 @@ request({
   "实际状态（正常/错误）",
   "实际销售额（元）",
   "实际佣金（元）",
+  "测试结果",
   "测试时间"
 ];
 const filterVal = [
       "id",
-      "M",
-      "I",
-      "P",
+      "machine",
+      "inspector",
+      "peripheral",
       "predict",
       "pre_amount",
       "pre_earn",
       "S",
       "A",
       "E",
+      "result",
       "test_time"
 ];
 const example = [
   {
     "id":"TS1",
-    "M":"50",
-    "I":"50",
-    "P":"50",
+    "machine":"50",
+    "inspector":"50",
+    "peripheral":"50",
     "predict":"正常",
     "pre_amount":"5000",
     "pre_earn":"1000",
-    "S":"正常",
-    "A":"5000",
-    "E":"1000"  
   }
 ]
 console.log(printExe);

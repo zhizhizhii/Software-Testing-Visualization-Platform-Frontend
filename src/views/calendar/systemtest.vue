@@ -9,17 +9,23 @@
           :value="item.value"
         />
       </el-select>
-      <div class="data-text">测试中日期取2021年5月（共31天）</div>
+
       <div class="button-group">
         <el-button
-        class="main-button"
-        type="success"
-        plain
-        @click="doTest"
-        :loading="loading"
-        >进行测试<i class="el-icon-upload el-icon--right"></i
-      ></el-button>
-      <el-button @click="reset(value)" class="reset-button" type="warning" plain>重置</el-button>
+          class="main-button"
+          type="success"
+          plain
+          @click="doTest"
+          :loading="loading"
+          >进行测试<i class="el-icon-upload el-icon--right"></i
+        ></el-button>
+        <el-button
+          @click="reset(value)"
+          class="reset-button"
+          type="warning"
+          plain
+          >重置</el-button
+        >
       </div>
     </div>
 
@@ -30,7 +36,7 @@
         :data="tableData"
         :height="tableHeight"
         border
-        style="width: 100%;"
+        style="width: 100%"
         v-loading="loading"
         :row-class-name="tableRowClassName"
       >
@@ -41,24 +47,31 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="X"
-          label="本月的通话分钟数X（分钟）"
-          width="240"
+          prop="year"
+          label="年份"
+          width="120"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="Y"
-          label="本年度至本月的累计未按时缴费的次数Y（次）"
+          prop="month"
+          width="120"
+          label="月份"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="day"
+          width="120"
+          label="天"
           align="center"
         ></el-table-column>
         <el-table-column
           prop="expectation"
-          label="每月的电话总费用预期输出"
+          label="预期输出"
           align="center"
         ></el-table-column>
         <el-table-column
           prop="actual"
-          label="每月的电话总费用实际输出"
+          label="实际输出"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -87,10 +100,9 @@
 </template>
 
 <script>
-import mock_1_json from "@/mock/cash/cash_mock_1.json";
-import mock_2_json from "@/mock/cash/cash_mock_2.json";
-import mock_3_json from "@/mock/cash/cash_mock_3.json";
-import { testcash } from "@/api/cashtest.js";
+import mock_1_json from "@/mock/calendar/calendar_mock_1.json";
+import mock_2_json from "@/mock/calendar/calendar_mock_2.json";
+import { testcalendar } from "@/api/calendartest.js";
 export default {
   name: "SystemTest",
   components: {},
@@ -98,80 +110,80 @@ export default {
   data() {
     return {
       options: [
-        {value: "1",label: "边界值法",},
-        {value: "2",label: "等价类法",},
-        {value: "3",label: "决策表法",},
+        { value: "1", label: "健壮边界值分析" },
+        { value: "2", label: "等价类分析" },
       ],
       value: "1",
       tableData: [],
       loading: false,
       classState: [],
-      json:{},
     };
   },
   computed: {
     tableHeight(){
-      return (this.parentHeight - 260) > 700 ? 700 : (this.parentHeight - 260);
+      return (this.parentHeight - 260) > 650 ? 650 : (this.parentHeight - 260);
     }
   },
   watch: {
-    value:{
-      handler(newVal){
+    value: {
+      handler(newVal) {
         this.reset(newVal);
       },
-      immediate:false,
-    }
+      immediate: false,
+    },
   },
   created() {},
   mounted() {
     this.initTableData(mock_1_json);
-    this.json = mock_1_json;
   },
   methods: {
-    initTableData(json){
+    initTableData(json) {
       this.classState = [];
-
       this.tableData = [];
       json.forEach((element) => {
-      let newData = {};
-      for (let key in element) {
-        if(key != "year" || key != "month"){
+        let newData = {};
+        for (let key in element) {
           newData[key] = element[key];
         }
-      }
-      newData["actual"] = "";
-      newData["info"] = "";
-      newData["state"] = null;
-      this.tableData.push(newData);
-    });
+        newData["actual"] = "";
+        newData["info"] = "";
+        newData["state"] = null;
+        this.tableData.push(newData);
+      });
     },
     tableRowClassName({ row, rowIndex }) {
       return this.classState[rowIndex];
     },
     doTest() {
-      let newData = {
-        cash_test_list: this.json,
-
-      };
+      let newData = {};
+      if (this.value === "1") {
+        newData = {
+          calendar_test_list: mock_1_json,
+        };
+      } else {
+        newData = {
+          calendar_test_list: mock_2_json,
+        };
+      }
       const _this = this;
       this.loading = true;
-      testcash(newData)
-        .then( 
-          res => {
-            _this.tableData.forEach((item, index) => {
-              let responseObject = res.data.test_result[index];
-              item.actual = responseObject.actual;
-              item.info = responseObject.info;
-              item.state = responseObject.test_result == "测试通过" ? true : false;
-              item.time = responseObject.test_time;
+      testcalendar(newData)
+        .then((res) => {
+          _this.tableData.forEach((item, index) => {
+            let responseObject = res.data.test_result[index];
+            item.actual = responseObject.actual;
+            item.info = responseObject.info;
+            item.state =
+              responseObject.test_result == "测试通过" ? true : false;
+            item.time = responseObject.test_time;
             _this.classState[index] = item["state"]
               ? "success-row"
               : "error-row";
           });
           this.$message({
-          message: '测试成功',
-          type: 'success'
-        });
+            message: "测试成功",
+            type: "success",
+          });
           _this.loading = false;
         })
         .catch((err) => {
@@ -179,20 +191,15 @@ export default {
           _this.loading = false;
         });
     },
-    reset(value){
-        if(value === "1"){
-          this.json = mock_1_json;
-          this.initTableData(mock_1_json);
-        }
-        else if(value === "2"){
-          this.json = mock_2_json;
-          this.initTableData(mock_2_json);
-        }
-        else{
-          this.json = mock_3_json;
-          this.initTableData(mock_3_json);
-        }
-    }
+    reset(value) {
+      if (value === "1") {
+        this.initTableData(mock_1_json);
+      } else if (value === "2") {
+        this.initTableData(mock_2_json);
+      } else {
+        this.initTableData(mock_2_json);
+      }
+    },
   },
 };
 </script>

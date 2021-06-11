@@ -1,0 +1,274 @@
+[
+  {
+    "id": "TS1",
+    "year": 2021,
+    "month": 5,
+    "X": -1,
+    "Y": 1,
+    "expectation": "-1"
+  },
+  {
+    "id": "TS2",
+    "year": 2021,
+    "month": 5,
+    "X": 1,
+    "Y": -1,
+    "expectation": "-1"
+  },
+  {
+    "id": "TS3",
+    "year": 2021,
+    "month": 5,
+    "X": 44641,
+    "Y": 1,
+    "expectation": "-1"
+  },
+  {
+    "id": "TS4",
+    "year": 2021,
+    "month": 5,
+    "X": 1,
+    "Y": 12,
+    "expectation": "-1"
+  },
+  {
+    "id": "TS5",
+    "year": 2021,
+    "month": 5,
+    "X": 0,
+    "Y": 1,
+    "expectation": "25"
+  },
+  {
+    "id": "TS6",
+    "year": 2021,
+    "month": 5,
+    "X": 0,
+    "Y": 2,
+    "expectation": "25"
+  },
+  {
+    "id": "TS7",
+    "year": 2021,
+    "month": 5,
+    "X": 0,
+    "Y": 3,
+    "expectation": "25"
+  },
+  {
+    "id": "TS8",
+    "year": 2021,
+    "month": 5,
+    "X": 0,
+    "Y": 4,
+    "expectation": "25"
+  },
+  {
+    "id": "TS9",
+    "year": 2021,
+    "month": 5,
+    "X": 0,
+    "Y": 8,
+    "expectation": "25"
+  },
+  {
+    "id": "TS10",
+    "year": 2021,
+    "month": 5,
+    "X": 60,
+    "Y": 1,
+    "expectation": "33.91"
+  },
+  {
+    "id": "TS11",
+    "year": 2021,
+    "month": 5,
+    "X": 60,
+    "Y": 2,
+    "expectation": "34"
+  },
+  {
+    "id": "TS12",
+    "year": 2021,
+    "month": 5,
+    "X": 60,
+    "Y": 3,
+    "expectation": "34"
+  },
+  {
+    "id": "TS13",
+    "year": 2021,
+    "month": 5,
+    "X": 60,
+    "Y": 4,
+    "expectation": "34"
+  },
+  {
+    "id": "TS14",
+    "year": 2021,
+    "month": 5,
+    "X": 60,
+    "Y": 8,
+    "expectation": "34"
+  },
+  {
+    "id": "TS15",
+    "year": 2021,
+    "month": 5,
+    "X": 120,
+    "Y": 1,
+    "expectation": "42.73"
+  },
+  {
+    "id": "TS16",
+    "year": 2021,
+    "month": 5,
+    "X": 120,
+    "Y": 2,
+    "expectation": "42.73"
+  },
+  {
+    "id": "TS17",
+    "year": 2021,
+    "month": 5,
+    "X": 120,
+    "Y": 3,
+    "expectation": "43"
+  },
+  {
+    "id": "TS18",
+    "year": 2021,
+    "month": 5,
+    "X": 120,
+    "Y": 4,
+    "expectation": "43"
+  },
+  {
+    "id": "TS19",
+    "year": 2021,
+    "month": 5,
+    "X": 120,
+    "Y": 8,
+    "expectation": "43"
+  },
+  {
+    "id": "TS20",
+    "year": 2021,
+    "month": 5,
+    "X": 180,
+    "Y": 1,
+    "expectation": "51.46"
+  },
+  {
+    "id": "TS21",
+    "year": 2021,
+    "month": 5,
+    "X": 180,
+    "Y": 2,
+    "expectation": "51.46"
+  },
+  {
+    "id": "TS22",
+    "year": 2021,
+    "month": 5,
+    "X": 180,
+    "Y": 3,
+    "expectation": "51.46"
+  },
+  {
+    "id": "TS23",
+    "year": 2021,
+    "month": 5,
+    "X": 180,
+    "Y": 4,
+    "expectation": "52"
+  },
+  {
+    "id": "TS24",
+    "year": 2021,
+    "month": 5,
+    "X": 180,
+    "Y": 8,
+    "expectation": "52"
+  },
+  {
+    "id": "TS25",
+    "year": 2021,
+    "month": 5,
+    "X": 300,
+    "Y": 1,
+    "expectation": "68.875"
+  },
+  {
+    "id": "TS26",
+    "year": 2021,
+    "month": 5,
+    "X": 300,
+    "Y": 2,
+    "expectation": "68.875"
+  },
+  {
+    "id": "TS27",
+    "year": 2021,
+    "month": 5,
+    "X": 300,
+    "Y": 3,
+    "expectation": "68.875"
+  },
+  {
+    "id": "TS28",
+    "year": 2021,
+    "month": 5,
+    "X": 300,
+    "Y": 4,
+    "expectation": "70"
+  },
+  {
+    "id": "TS29",
+    "year": 2021,
+    "month": 5,
+    "X": 300,
+    "Y": 8,
+    "expectation": "70"
+  },
+  {
+    "id": "TS30",
+    "year": 2021,
+    "month": 5,
+    "X": 400,
+    "Y": 1,
+    "expectation": "83.2"
+  },
+  {
+    "id": "TS31",
+    "year": 2021,
+    "month": 5,
+    "X": 400,
+    "Y": 2,
+    "expectation": "83.2"
+  },
+  {
+    "id": "TS32",
+    "year": 2021,
+    "month": 5,
+    "X": 400,
+    "Y": 3,
+    "expectation": "83.2"
+  },
+  {
+    "id": "TS33",
+    "year": 2021,
+    "month": 5,
+    "X": 400,
+    "Y": 4,
+    "expectation": "83.2"
+  },
+  {
+    "id": "TS34",
+    "year": 2021,
+    "month": 5,
+    "X": 400,
+    "Y": 8,
+    "expectation": "85"
+  }
+]

@@ -8,10 +8,8 @@
           :label="item.label"
           :value="item.value"
         />
-      </el-select>
-      <div class="data-text">测试中日期取2021年5月（共31天）</div>
-      <div class="button-group">
-        <el-button
+      </el-select>  
+      <el-button
         class="main-button"
         type="success"
         plain
@@ -19,8 +17,6 @@
         :loading="loading"
         >进行测试<i class="el-icon-upload el-icon--right"></i
       ></el-button>
-      <el-button @click="reset(value)" class="reset-button" type="warning" plain>重置</el-button>
-      </div>
     </div>
 
     <el-divider content-position="right">测试用例</el-divider>
@@ -28,9 +24,9 @@
     <div class="main-table">
       <el-table
         :data="tableData"
-        :height="tableHeight"
+        max-height="500"
         border
-        style="width: 100%;"
+        style="width: 100%"
         v-loading="loading"
         :row-class-name="tableRowClassName"
       >
@@ -41,29 +37,49 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="X"
-          label="本月的通话分钟数X（分钟）"
+          prop="M"
+          label="销售的主机数量M（台）"
           width="240"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="Y"
-          label="本年度至本月的累计未按时缴费的次数Y（次）"
+          prop="I"
+          label="销售的显示器数量I（台）"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="expectation"
-          label="每月的电话总费用预期输出"
+          prop="P"
+          label="销售的外设数量P（套）"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="actual"
-          label="每月的电话总费用实际输出"
+          prop="predict"
+          label="预计状态"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="info"
-          label="程序运行信息"
+          prop="pre_amount"
+          label="预计销售额"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="pre_earn"
+          label="预计佣金"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="S"
+          label="实际状态"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="A"
+          label="实际销售额"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="E"
+          label="实际佣金"
           align="center"
         ></el-table-column>
         <el-table-column prop="state" label="测试结果" align="center">
@@ -87,14 +103,12 @@
 </template>
 
 <script>
-import mock_1_json from "@/mock/cash/cash_mock_1.json";
-import mock_2_json from "@/mock/cash/cash_mock_2.json";
-import mock_3_json from "@/mock/cash/cash_mock_3.json";
-import { testcash } from "@/api/cashtest.js";
+import mock_1_json from "@/mock/sales_mock.json";
+import { testsales } from "@/api/salestest.js";
 export default {
   name: "SystemTest",
   components: {},
-  props: ["parentHeight"],
+  props: {},
   data() {
     return {
       options: [
@@ -106,18 +120,23 @@ export default {
       tableData: [],
       loading: false,
       classState: [],
-      json:{},
+
     };
   },
-  computed: {
-    tableHeight(){
-      return (this.parentHeight - 260) > 700 ? 700 : (this.parentHeight - 260);
-    }
-  },
+  computed: {},
   watch: {
     value:{
-      handler(newVal){
-        this.reset(newVal);
+      handler(newVal,oldVal){
+        console.log(newVal);
+        if(newVal === "1"){
+          this.initTableData(mock_1_json);
+        }
+        else if(newVal === "2"){
+
+        }
+        else{
+
+        }
       },
       immediate:false,
     }
@@ -125,22 +144,18 @@ export default {
   created() {},
   mounted() {
     this.initTableData(mock_1_json);
-    this.json = mock_1_json;
   },
   methods: {
     initTableData(json){
-      this.classState = [];
-
       this.tableData = [];
       json.forEach((element) => {
       let newData = {};
       for (let key in element) {
-        if(key != "year" || key != "month"){
-          newData[key] = element[key];
-        }
+        newData[key] = element[key];
       }
-      newData["actual"] = "";
-      newData["info"] = "";
+      newData["A"] = "";
+      newData["S"] = "";
+      newData["E"] = "";
       newData["state"] = null;
       this.tableData.push(newData);
     });
@@ -150,49 +165,32 @@ export default {
     },
     doTest() {
       let newData = {
-        cash_test_list: this.json,
-
+        sales_test_list: mock_1_json,
       };
       const _this = this;
       this.loading = true;
-      testcash(newData)
+      testsales(newData)
         .then( 
           res => {
             _this.tableData.forEach((item, index) => {
               let responseObject = res.data.test_result[index];
-              item.actual = responseObject.actual;
-              item.info = responseObject.info;
-              item.state = responseObject.test_result == "测试通过" ? true : false;
-              item.time = responseObject.test_time;
+              item.A = responseObject.amount;
+              item.S = responseObject.actual;
+              item.E = responseObject.earn;
+              item.state = item.A == item.pre_amount ? true : false;
+
             _this.classState[index] = item["state"]
               ? "success-row"
               : "error-row";
           });
-          this.$message({
-          message: '测试成功',
-          type: 'success'
-        });
           _this.loading = false;
         })
+
         .catch((err) => {
-          _this.$message.error("Server Error");
+          console.log(err);
           _this.loading = false;
         });
     },
-    reset(value){
-        if(value === "1"){
-          this.json = mock_1_json;
-          this.initTableData(mock_1_json);
-        }
-        else if(value === "2"){
-          this.json = mock_2_json;
-          this.initTableData(mock_2_json);
-        }
-        else{
-          this.json = mock_3_json;
-          this.initTableData(mock_3_json);
-        }
-    }
   },
 };
 </script>
@@ -204,13 +202,31 @@ export default {
 /deep/ .el-table .success-row {
   background-color: #f7fff9;
 }
+.item {
+  margin-bottom: 10px;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+.main-form {
+  margin-top: 10px;
+}
 .main-button {
   width: 500px;
   margin-top: 10px;
 }
-.reset-button {
-  width: 200px;
-  margin-top: 10px;
+.box-card {
+  padding: 0;
+}
+.single-form{
+  width:600px;
+  top:50%;
+  left:50%;
 }
 .main-header{
   display: flex;

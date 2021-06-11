@@ -17,8 +17,10 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="/cash">电信收费问题</el-menu-item>
+          <el-menu-item index="/calendar">万年历问题</el-menu-item>
 
           <el-menu-item index="/triangle">判断三角形</el-menu-item>
+
 
           <el-menu-item index="/sales">电脑销售系统</el-menu-item>
 

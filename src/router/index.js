@@ -34,6 +34,11 @@ const routes = [
         component:Triangle
       },
       {
+        path:'/calendar',
+        name:'calendar',
+        component: () => import("@/views/calendar")
+      },
+      {
         path:'/sales',
         name:'sales',
         component:Sales

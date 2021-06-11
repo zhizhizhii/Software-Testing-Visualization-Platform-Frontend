@@ -1,9 +1,9 @@
 import request from "../utils/request"
 
-export const login = data =>{
+export const testsales = data =>{
     return request({
         method:'POST',
-        url:'/api/cash/test',
+        url:'/api/sales/test',
         data
     })
 }

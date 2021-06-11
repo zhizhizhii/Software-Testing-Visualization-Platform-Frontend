@@ -5,6 +5,7 @@ import Home from '@/views/home/'
 import Layout from '@/views/layout/'
 import Cash from '@/views/cash/'
 import Sales from '@/views/sales/'
+
 Vue.use(VueRouter)
 
 const routes = [

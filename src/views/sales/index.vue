@@ -1,12 +1,17 @@
 <template>
+<<<<<<< HEAD
   <div>
     <el-card shadow="hover">
+=======
+    <el-card id="main-card" style="height:100%" shadow="hover">
+>>>>>>> lili_dev
       <el-tabs v-model="activeName" @tab-click="handleClick">
 
         <el-tab-pane label="问题描述" name="first">
           <SalesQuestion />
         </el-tab-pane>
 
+<<<<<<< HEAD
         <el-tab-pane label="系统测试用例测试" name="second">
           <el-select v-model="value" placeholder="请选择测试方法">
             <el-option
@@ -148,12 +153,48 @@ export default {
           region: '',
           type: ''
         }
+=======
+        <el-tab-pane class="main-container" label="系统测试用例测试" name="second">
+          <SystemTest />
+        </el-tab-pane>
+
+        <el-tab-pane  label="单测试用例输入" name="third">
+          <SingleCase />
+        </el-tab-pane>
+
+        <el-tab-pane label="测试用例文件处理" name="fourth">
+          <ExcelFile />
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
+</template>
+
+<script>
+import SalesQuestion from "./question";
+import SystemTest from "./systemtest";
+import SingleCase from "./singlecase";
+import ExcelFile from "./excelfile";
+
+export default {
+  name: "Sales",
+  components: { 
+    SalesQuestion,
+    SystemTest,
+    SingleCase,
+    ExcelFile
+  },
+  props: {},
+  data() {
+    return {
+      activeName: "first",
+>>>>>>> lili_dev
     };
   },
   computed: {},
   watch: {},
   created() {},
   mounted() {
+<<<<<<< HEAD
     data.forEach((element) => {
       let newData = {};
       for (let key in element) {
@@ -226,6 +267,22 @@ export default {
 /deep/ .el-table .success-row {
   background-color: #f7fff9;
 }
+=======
+  },
+  methods: {
+    handleClick(){
+
+    },
+    
+
+  },
+};
+
+</script>
+
+<style scoped lang="less">
+
+>>>>>>> lili_dev
 .item {
   margin-bottom: 10px;
 }
@@ -241,7 +298,11 @@ export default {
   margin-top: 10px;
 }
 .main-button {
+<<<<<<< HEAD
   width: 100%;
+=======
+  width: 500px;
+>>>>>>> lili_dev
   margin-top: 10px;
 }
 .box-card {
@@ -252,7 +313,22 @@ export default {
   top:50%;
   left:50%;
 }
+<<<<<<< HEAD
 .block{
 
 }
+=======
+.main-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:20px;
+}
+.main-table{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+>>>>>>> lili_dev
 </style>

@@ -1,6 +1,6 @@
 import request from "../utils/request"
 
-export const testcash = data =>{
+export const login = data =>{
     return request({
         method:'POST',
         url:'/api/cash/test',

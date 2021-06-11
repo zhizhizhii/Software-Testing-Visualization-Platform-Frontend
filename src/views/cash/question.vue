@@ -1,7 +1,7 @@
 <template>
   <div>
-    <span style="font-size: 18px"><b>&nbsp;电信收费问题</b></span>
-    <div style="font-size: 12px">
+    <span style="font-size: 24px"><b>&nbsp;电信收费问题</b></span>
+    <div style="font-size: 16px">
       <p>研究一个与我们的生活息息相关的电信收费问题系统，需求描述如下：</p>
       <p>
         A.
@@ -17,18 +17,18 @@
         当月的通话分钟数和折扣比例及本年度未按时缴费次数之间有直接的对应关系，如果本年度的未按时缴费的次数超过本月通话时间所对应的容许值则免于折扣，并按实际的通话费计算。
       </p>
       <p>D. 通话时间和折扣比例及未按时缴费次数的关系为：</p>
-      <el-table :data="questionData" style="width: 60%; font-size: 12px">
+      <el-table :data="questionData" style="width: 100%; font-size: 16px">
         <el-table-column
           prop="minute"
           label="本月通话的分钟数"
-          width="140"
+          width="400"
           align="center"
         >
         </el-table-column>
         <el-table-column
           prop="times"
           label="通话时间段的最大容许不按时缴费次数"
-          width="240"
+          width="400"
           align="center"
         >
         </el-table-column>

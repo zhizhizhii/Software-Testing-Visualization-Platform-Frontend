@@ -17,7 +17,7 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="/cash">电信收费问题</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
+          <el-menu-item index="/calendar">万年历问题</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="2">

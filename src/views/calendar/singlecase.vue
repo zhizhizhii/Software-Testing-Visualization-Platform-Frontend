@@ -6,16 +6,14 @@
       label-width="400px"
       :model="formLabelAlign"
     >
-      <el-form-item label="本月的通话分钟数X（分钟）">
-        <el-input v-model="formLabelAlign.X"></el-input>
-      </el-form-item>
-      <el-form-item label="本年度至本月的累计未按时缴费的次数Y（次）">
-        <el-input v-model="formLabelAlign.Y"></el-input>
+      <el-form-item label="年份">
+        <el-input v-model="formLabelAlign.year"></el-input>
       </el-form-item>
       <el-form-item label="月份">
-        <el-date-picker v-model="date" type="month" placeholder="选择月"
-        value-format="yyyy-MM" >
-        </el-date-picker>
+        <el-input v-model="formLabelAlign.month"></el-input>
+      </el-form-item>
+      <el-form-item label="天数">
+        <el-input v-model="formLabelAlign.day"></el-input>
       </el-form-item>
       <el-form-item label="每月的电话总费用预期输出">
         <el-input v-model="formLabelAlign.expectation"></el-input>
@@ -39,7 +37,9 @@
 </template>
 
 <script>
-import { testcash } from "@/api/cashtest.js";
+
+import { testcalendar } from "@/api/calendartest.js";
+
 export default {
   name: "SingleCase",
   components: {},
@@ -50,9 +50,10 @@ export default {
       info:"",
       labelPosition: 'right',
         formLabelAlign: {
-          X: 0,
-          Y: 0,
-          expectation: 0
+          year: 0,
+          month: 0,
+          day: 0,
+          expectation:0,
         }, 
         date:"",
         loading:false,
@@ -66,30 +67,46 @@ export default {
   methods: {
     doTest(){
       let formdata = {
-        id:"TS1",
-        year:this.date.split("-")[0],
-        month:this.date.split("-")[1],
-        X:this.formLabelAlign.X,
-        Y:this.formLabelAlign.Y,
-        expectation:this.formLabelAlign.expectation,
+        id: "TS1",
+        year: this.formLabelAlign.year,
+        month: this.formLabelAlign.month,
+        day:this.formLabelAlign.day,
+        expectation: this.formLabelAlign.expectation,
       }
       let data = {
-        cash_test_list:[formdata],
+        calendar_test_list:[formdata],
       }
-      testcash(data).then((res)=>{
+      testcalendar(data).then((res)=>{
         this.actual = res.data.test_result[0].actual;
         this.info = res.data.test_result[0].info;
-      }).catch((err)=>{
-        this.$message.err("Server Error");
       })
+
     }
   },
 };
 </script>
 
 <style scoped>
+.item {
+  margin-bottom: 10px;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+.main-form {
+  margin-top: 10px;
+}
 .main-button {
   width:100%;
+
+}
+.box-card {
+  padding: 0;
 }
 .single-form{
   width:600px;

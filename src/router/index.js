@@ -26,6 +26,11 @@ const routes = [
         path:'/cash',
         name:'cash',
         component:Cash
+      },
+      {
+        path:'/calendar',
+        name:'calendar',
+        component: () => import("@/views/calendar")
       }
     ]
   }

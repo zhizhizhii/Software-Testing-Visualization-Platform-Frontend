@@ -3,7 +3,7 @@
       <el-tabs v-model="activeName" @tab-click="handleClick">
 
         <el-tab-pane label="问题描述" name="first">
-          <CashQuestion />
+          <TriangleQuestion />
         </el-tab-pane>
 
         <el-tab-pane class="main-container" label="系统测试用例测试" name="second">
@@ -22,15 +22,15 @@
 </template>
 
 <script>
-import CashQuestion from "./question";
+import TriangleQuestion from "./question";
 import SystemTest from "./systemtest";
 import SingleCase from "./singlecase";
 import ExcelFile from "./excelfile";
 
 export default {
-  name: "Cash",
+  name: "Triangle",
   components: { 
-    CashQuestion,
+    TriangleQuestion,
     SystemTest,
     SingleCase,
     ExcelFile

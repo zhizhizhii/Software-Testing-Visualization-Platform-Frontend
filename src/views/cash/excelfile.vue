@@ -1,7 +1,6 @@
 <template>
   <div class="file">
     <el-button type="primary" plain @click="outExe">生成模板</el-button>
-
     <el-upload
       class="upload-demo"
       drag
@@ -16,6 +15,7 @@
         请先点击生成模板，填写好相应测试用例，再上传，限xls/xlsx格式，不超过30M.
       </div>
     </el-upload>
+
   </div>
 </template>
 
@@ -112,5 +112,6 @@ export default {
 .upload-demo {
   width: 80%;
   margin-top: 20px;
+
 }
 </style>

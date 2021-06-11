@@ -1,7 +1,9 @@
 <template>
   <div>
+
     <span style="font-size: 24px"><b>&nbsp;电信收费问题</b></span>
     <div style="font-size: 16px">
+
       <p>研究一个与我们的生活息息相关的电信收费问题系统，需求描述如下：</p>
       <p>
         A.
@@ -22,6 +24,7 @@
           prop="minute"
           label="本月通话的分钟数"
           width="400"
+
           align="center"
         >
         </el-table-column>

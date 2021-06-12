@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <el-divider content-position="right">测试用例</el-divider>
+    <el-divider content-position="left">测试用例</el-divider>
 
     <div class="main-table">
       <el-table
@@ -151,7 +151,6 @@ export default {
     doTest() {
       let newData = {
         cash_test_list: this.json,
-
       };
       const _this = this;
       this.loading = true;

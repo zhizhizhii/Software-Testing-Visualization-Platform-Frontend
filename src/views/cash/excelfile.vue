@@ -4,7 +4,6 @@
     <el-upload
       class="upload-demo"
       drag
-      action="https://jsonplaceholder.typicode.com/posts/"
       multiple
       :file-list="fileList"
       :http-request="getFile"
@@ -15,13 +14,13 @@
         请先点击生成模板，填写好相应测试用例，再上传，限xls/xlsx格式，不超过30M.
       </div>
     </el-upload>
-
   </div>
 </template>
 
 <script>
 import printExe from "@/excel/outexe.js";
 import { uploadfile } from "@/api/cashtest.js";
+import { dateformat } from "@/utils/dateformat.js";
 export default {
   name: "ExcelFile",
   components: {},
@@ -81,8 +80,8 @@ export default {
           ];
           printExe("电信收费问题模板", tHeader, filterVal, example);
         })
-        .catch((err) => {
-          this.$message('已取消');
+        .catch(() => {
+          this.$message("已取消");
         });
     },
     getFile(item) {
@@ -94,14 +93,17 @@ export default {
           let a = document.createElement("a");
           a.style.display = "none";
           a.href = url;
-          a.setAttribute("download", "1.xls");
+          a.setAttribute(
+            "download",
+            "电信收费问题测试报告 " + dateformat() + ".xls"
+          );
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
           window.URL.revokeObjectURL(url);
         })
-        .catch((err) => {
-           this.$message.error("Server Error");
+        .catch(() => {
+          this.$message.error("Server Error");
         });
     },
   },
@@ -112,6 +114,5 @@ export default {
 .upload-demo {
   width: 80%;
   margin-top: 20px;
-
 }
 </style>

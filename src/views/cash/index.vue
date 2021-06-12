@@ -3,7 +3,6 @@
 <el-card id="main-card" style="height:100%" shadow="hover">
       <el-tabs v-model="activeName" >
 
-
         <el-tab-pane label="问题描述" name="first">
           <CashQuestion />
         </el-tab-pane>
@@ -46,15 +45,12 @@ export default {
     return {
       activeName: "first",
       parentHeight:3333
-
     };
   },
   computed: {},
   watch: {},
-
   created() {
     window.addEventListener('resize', this.getHeight);
-
   },
   mounted() {},
   methods: {

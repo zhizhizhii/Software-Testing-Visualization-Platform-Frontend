@@ -1,19 +1,19 @@
 import request from "../utils/request"
 
-export const testcalendar = data =>{
+export const testcalendar = data => {
   return request({
-      method:'POST',
-      url:'/api/calendar/test',
-      data
+    method: 'POST',
+    url: '/api/calendar/test',
+    data
   })
 }
 
-export const uploadfile = data =>{
+export const uploadfile = data => {
   return request({
-      method:'POST',
-      config:{'Content-Type': 'multipart/form-data'},
-      data,
-      responseType: 'blob',
-      url:'/api/calendar/upload',
-    })
+    method: 'POST',
+    config: { 'Content-Type': 'multipart/form-data' },
+    data,
+    responseType: 'blob',
+    url: '/api/calendar/upload',
+  })
 }

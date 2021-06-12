@@ -22,7 +22,7 @@
 <script>
 import printExe from "@/excel/outexe.js";
 import { uploadfile } from "@/api/calendartest.js";
-import { dateformat } from "@/utils/dateformat.js"
+import { dateformat } from "@/utils/dateformat.js";
 export default {
   name: "ExcelFile",
   components: {},
@@ -79,8 +79,8 @@ export default {
           ];
           printExe("万年历问题模板", tHeader, filterVal, example);
         })
-        .catch((err) => {
-          this.$message('已取消');
+        .catch(() => {
+          this.$message("已取消");
         });
     },
     getFile(item) {
@@ -92,14 +92,17 @@ export default {
           let a = document.createElement("a");
           a.style.display = "none";
           a.href = url;
-          a.setAttribute("download", "万年历问题测试报告 " + dateformat() + ".xls");
+          a.setAttribute(
+            "download",
+            "万年历问题测试报告 " + dateformat() + ".xls"
+          );
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
           window.URL.revokeObjectURL(url);
         })
-        .catch((err) => {
-           this.$message.error("Server Error");
+        .catch(() => {
+          this.$message.error("Server Error");
         });
     },
   },

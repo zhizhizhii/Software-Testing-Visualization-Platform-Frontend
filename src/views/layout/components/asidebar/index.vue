@@ -23,6 +23,15 @@
 
 
           <el-menu-item index="/sales">电脑销售系统</el-menu-item>
+          
+          <el-menu-item index="/two">第二题：销售管理系统</el-menu-item>
+          <el-menu-item index="/four">第四题：讨论</el-menu-item>
+          <el-menu-item index="/seven">第七题：实时系统</el-menu-item>
+          <el-menu-item index="/nine">第九题：ATM机</el-menu-item>
+          <el-menu-item index="/ten">第十题：ERP系统</el-menu-item>
+          <el-menu-item index="/eleven">第十一题：实时Web系统</el-menu-item>
+          <el-menu-item index="/twelve">第十二题：构建程序图</el-menu-item>
+          <el-menu-item index="/thirteen">第十三题：销售系统</el-menu-item>
 
         </el-menu-item-group>
       </el-submenu>

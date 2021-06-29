@@ -111,7 +111,7 @@ export default {
     return {
       options: [
         { value: "1", label: "健壮边界值分析" },
-        { value: "2", label: "等价类分析" },
+        { value: "2", label: "强健壮等价类测试" },
       ],
       value: "1",
       tableData: [],

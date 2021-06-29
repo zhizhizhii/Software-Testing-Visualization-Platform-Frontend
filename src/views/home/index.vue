@@ -1,8 +1,7 @@
 <template>
-    <div>
-        <h1>123312</h1>
+    <div class="main-container">
+       <img width="600" src="./main-bg.png"/>
     </div>
-
 </template>
 
 <script>
@@ -25,6 +24,11 @@ export default {
 </script>
 
 <style scoped lang="less">
-
+.main-container{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <span style="font-size:18px;"><b>&nbsp;第十一题</b></span>
-      <div style="font-size:12px;">
+        <span style="font-size:24px;"><b>&nbsp;第十一题</b></span>
+      <div style="font-size:16px;">
         
       <p >某实时的Web系统，服务器端应用程序需要接受客户端发送的不同类型的数据包，为了使系统设计达到最优，使用统一接口，接口（通用包）描述为：</p>
        <p> 接口包的类型：正常交易包、查询包、退货包、换货包、部分退货包、部分换货包；</p>

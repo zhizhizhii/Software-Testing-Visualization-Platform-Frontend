@@ -1,7 +1,7 @@
 <template>
     <div>
-        <span style="font-size:18px;"><b>&nbsp;第七题</b></span>
-      <div style="font-size:12px;">
+        <span style="font-size:24px;"><b>&nbsp;第七题</b></span>
+      <div style="font-size:16px;">
         
       <p >某实时的C/S系统，服务器端应用程序需要接受客户端发送的不同类型的数据包，为了使系统设计达到最优，使用统一接口，接口（通用包）的格式为：</p>
       <img src="./seven.png"/>

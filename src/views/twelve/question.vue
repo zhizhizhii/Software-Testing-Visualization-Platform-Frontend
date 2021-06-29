@@ -1,7 +1,7 @@
 <template>
     <div>
-        <span style="font-size:18px;"><b>&nbsp;第十二题</b></span>
-      <div style="font-size:12px;">
+        <span style="font-size:24px;"><b>&nbsp;第十二题</b></span>
+      <div style="font-size:16px;">
         
       <p >按照下列C语言程序前的编号，构建起程序图（control flow graph or program diagram），不需要理解具体的代码实现内容，只要理解其逻辑即可。</p>
       <img src="./12.jpg"/>

@@ -106,7 +106,7 @@ export default {
   data() {
     return {
       options: [
-        { value: "1", label: "边界值法" },
+        { value: "1", label: "健壮性边界分析" },
         { value: "2", label: "等价类法" },
       ],
       value: "1",
@@ -137,6 +137,7 @@ export default {
   },
   methods: {
     initTableData(json) {
+      this.classState = [];
       this.tableData = [];
       json.forEach((element) => {
         let newData = {};

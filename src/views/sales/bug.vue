@@ -112,15 +112,14 @@
 </template>
 
 <script>
-import mock_1_json from "@/mock/sales/sales_mock.json";
-import { testsales } from "@/api/salestest.js";
+import sales_bug_mock_1_json from "@/mock/sales/sales_bug_mock_1.json";
 export default {
   name: "SystemTest",
   components: {},
   props: ["parentHeight"],
   data() {
     return {
-      options: [{ value: "1", label: "健壮性边界分析法" }],
+      options: [{ value: "1", label: "bug_v1_输入为负数的情况" }],
       value: "1",
       tableData: [],
       loading: false,
@@ -142,7 +141,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.initTableData(mock_1_json);
+    this.initTableData(sales_bug_mock_1_json);
   },
   methods: {
     initTableData(json) {
@@ -164,45 +163,31 @@ export default {
       return this.classState[rowIndex];
     },
     doTest() {
-      let newData = {
-        sales_test_list: mock_1_json,
-      };
-      const _this = this;
       this.loading = true;
-      testsales(newData)
-        .then((res) => {
-          _this.tableData.forEach((item, index) => {
-            let responseObject = res.data.test_result[index];
-            item.A = responseObject.amount;
-            item.S = responseObject.actual;
-            item.E = responseObject.earn;
-            item.state = item.A == item.pre_amount ? true : false;
-            item.time = responseObject.test_time;
-            _this.classState[index] = item["state"]
-              ? "success-row"
-              : "error-row";
-          });
-          this.$message({
-            message: "测试成功",
-            type: "success",
-          });
-          _this.loading = false;
-        })
-        .catch((err) => {
-          _this.$message.error("Server Error");
-          _this.loading = false;
+      let testdata = {
+        id: "TS1",
+        actual: "Internal Server Error!",
+        amount: "Internal Server Error!",
+        earn: "Internal Server Error!",
+        test_time: "Internal Server Error!",
+      };
+      setTimeout(() => {
+        this.tableData.forEach((item, index) => {
+          let responseObject = testdata;
+          item.A = responseObject.amount;
+          item.S = responseObject.actual;
+          item.E = responseObject.earn;
+          item.state = item.A == item.pre_amount ? true : false;
+          item.time = responseObject.test_time;
+          this.classState[index] = item["state"] ? "success-row" : "error-row";
         });
+        this.loading = false;
+      }, 500);
     },
     reset(value) {
       if (value === "1") {
         this.json = mock_1_json;
-        this.initTableData(mock_1_json);
-      } else if (value === "2") {
-        this.json = mock_2_json;
-        this.initTableData(mock_2_json);
-      } else {
-        this.json = mock_3_json;
-        this.initTableData(mock_3_json);
+        this.initTableData(sales_bug_mock_1_json);
       }
     },
   },
@@ -224,13 +209,13 @@ export default {
   width: 200px;
   margin-top: 10px;
 }
-.main-header{
+.main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
-.main-table{
+.main-table {
   height: 100%;
   display: flex;
   align-items: center;

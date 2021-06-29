@@ -1,7 +1,7 @@
 <template>
     <div>
-        <span style="font-size:18px;"><b>&nbsp;第四题</b></span>
-      <div style="font-size:12px;">
+        <span style="font-size:24px;"><b>&nbsp;第四题</b></span>
+      <div style="font-size:16px;">
         
       <p >讨论题：边界值测试可以适用于function(method) level，class level,，system level，分析电商平台系统测试时考虑的边界值情况。</p>
 

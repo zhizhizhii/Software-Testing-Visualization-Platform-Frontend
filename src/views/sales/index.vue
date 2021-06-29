@@ -11,7 +11,7 @@
           label="系统测试用例测试"
           name="second"
         >
-          <SystemTest :parentHeight="parentHeight"/>
+          <SystemTest :parentHeight="parentHeight" />
         </el-tab-pane>
 
         <el-tab-pane label="单测试用例输入" name="third">
@@ -20,6 +20,10 @@
 
         <el-tab-pane label="测试用例文件处理" name="fourth">
           <ExcelFile />
+        </el-tab-pane>
+
+        <el-tab-pane label="缺陷版本记录" name="fifth">
+          <BugRecord :parentHeight="parentHeight" />
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -31,6 +35,7 @@ import SalesQuestion from "./question";
 import SystemTest from "./systemtest";
 import SingleCase from "./singlecase";
 import ExcelFile from "./excelfile";
+import BugRecord from "./bug";
 
 export default {
   name: "Sales",
@@ -39,6 +44,7 @@ export default {
     SystemTest,
     SingleCase,
     ExcelFile,
+    BugRecord,
   },
   props: {},
   data() {
@@ -57,7 +63,7 @@ export default {
     getHeight() {
       try {
         this.parentHeight = this.$refs.tabs.offsetHeight;
-      } catch (err) {};
+      } catch (err) {}
     },
   },
 };

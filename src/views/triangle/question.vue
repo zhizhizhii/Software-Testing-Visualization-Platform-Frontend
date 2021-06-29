@@ -1,7 +1,7 @@
 <template>
   <div>
-    <span style="font-size: 18px"><b>&nbsp;判断三角形问题</b></span>
-    <div style="font-size: 12px">
+    <span style="font-size: 24px"><b>&nbsp;判断三角形问题</b></span>
+    <div style="font-size: 16px">
       <p>判断三角形类型问题，需求描述如下：</p>
       <p>
         A.

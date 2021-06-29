@@ -9,6 +9,7 @@
           :value="item.value"
         />
       </el-select>
+      <div class="data-text">测试中日期取2021年5月（共31天）</div>
       <div class="button-group">
         <el-button
           class="main-button"
@@ -28,7 +29,7 @@
       </div>
     </div>
 
-    <el-divider content-position="right">测试用例</el-divider>
+    <el-divider content-position="left">测试用例</el-divider>
 
     <div class="main-table">
       <el-table
@@ -46,49 +47,29 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="M"
-          label="销售的主机数量M（台）"
+          prop="X"
+          label="本月的通话分钟数X（分钟）"
           width="240"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="I"
-          label="销售的显示器数量I（台）"
+          prop="Y"
+          label="本年度至本月的累计未按时缴费的次数Y（次）"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="P"
-          label="销售的外设数量P（套）"
+          prop="expectation"
+          label="每月的电话总费用预期输出"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="predict"
-          label="预计状态"
+          prop="actual"
+          label="每月的电话总费用实际输出"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="pre_amount"
-          label="预计销售额"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="pre_earn"
-          label="预计佣金"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="S"
-          label="实际状态"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="A"
-          label="实际销售额"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="E"
-          label="实际佣金"
+          prop="info"
+          label="程序运行信息"
           align="center"
         ></el-table-column>
         <el-table-column prop="state" label="测试结果" align="center">
@@ -112,24 +93,29 @@
 </template>
 
 <script>
-import mock_1_json from "@/mock/sales/sales_mock.json";
-import { testsales } from "@/api/salestest.js";
+import cash_bug_mock_1_json from "@/mock/cash/cash_bug_mock_1.json";
+import cash_bug_mock_2_json from "@/mock/cash/cash_bug_mock_2.json";
+
 export default {
-  name: "SystemTest",
+  name: "BugRecodrd",
   components: {},
   props: ["parentHeight"],
   data() {
     return {
-      options: [{ value: "1", label: "健壮性边界分析法" }],
+      options: [
+        { value: "1", label: "bug_v1_无法处理负数请求" },
+        { value: "2", label: "bug_v2_无法处理非数字请求" },
+      ],
       value: "1",
       tableData: [],
       loading: false,
       classState: [],
+      json: {},
     };
   },
   computed: {
     tableHeight() {
-      return this.parentHeight - 260 > 650 ? 650 : this.parentHeight - 260;
+      return this.parentHeight - 260 > 700 ? 700 : this.parentHeight - 260;
     },
   },
   watch: {
@@ -142,20 +128,23 @@ export default {
   },
   created() {},
   mounted() {
-    this.initTableData(mock_1_json);
+    this.initTableData(cash_bug_mock_1_json);
+    this.json = cash_bug_mock_1_json;
   },
   methods: {
     initTableData(json) {
       this.classState = [];
+
       this.tableData = [];
       json.forEach((element) => {
         let newData = {};
         for (let key in element) {
-          newData[key] = element[key];
+          if (key != "year" || key != "month") {
+            newData[key] = element[key];
+          }
         }
-        newData["A"] = "";
-        newData["S"] = "";
-        newData["E"] = "";
+        newData["actual"] = "";
+        newData["info"] = "";
         newData["state"] = null;
         this.tableData.push(newData);
       });
@@ -164,45 +153,79 @@ export default {
       return this.classState[rowIndex];
     },
     doTest() {
-      let newData = {
-        sales_test_list: mock_1_json,
-      };
-      const _this = this;
       this.loading = true;
-      testsales(newData)
-        .then((res) => {
-          _this.tableData.forEach((item, index) => {
-            let responseObject = res.data.test_result[index];
-            item.A = responseObject.amount;
-            item.S = responseObject.actual;
-            item.E = responseObject.earn;
-            item.state = item.A == item.pre_amount ? true : false;
+      if (this.value === "1") {
+        let test_result = [
+          {
+            id: "TS1",
+            actual: "Internal Server Error!",
+            info: "Internal Server Error!",
+            test_result: "测试未通过",
+            test_time: "Internal Server Error!",
+          },
+          {
+            id: "TS2",
+            actual: "Internal Server Error!",
+            info: "Internal Server Error!",
+            test_result: "测试未通过",
+            test_time: "Internal Server Error!",
+          },
+        ];
+        setTimeout(() => {
+          this.tableData.forEach((item, index) => {
+            let responseObject = test_result[index];
+            item.actual = responseObject.actual;
+            item.info = responseObject.info;
+            item.state =
+              responseObject.test_result == "测试通过" ? true : false;
             item.time = responseObject.test_time;
-            _this.classState[index] = item["state"]
+            this.classState[index] = item["state"]
               ? "success-row"
               : "error-row";
           });
-          this.$message({
-            message: "测试成功",
-            type: "success",
+          this.loading = false;
+        }, 500);
+      }
+      if (this.value === "2") {
+        let test_result = [
+          {
+            id: "TS1",
+            actual: "Internal Server Error!",
+            info: "Internal Server Error!",
+            test_result: "测试未通过",
+            test_time: "Internal Server Error!",
+          },
+          {
+            id: "TS2",
+            actual: "Internal Server Error!",
+            info: "Internal Server Error!",
+            test_result: "测试未通过",
+            test_time: "Internal Server Error!",
+          },
+        ];
+        setTimeout(() => {
+          this.tableData.forEach((item, index) => {
+            let responseObject = test_result[index];
+            item.actual = responseObject.actual;
+            item.info = responseObject.info;
+            item.state =
+              responseObject.test_result == "测试通过" ? true : false;
+            item.time = responseObject.test_time;
+            this.classState[index] = item["state"]
+              ? "success-row"
+              : "error-row";
           });
-          _this.loading = false;
-        })
-        .catch((err) => {
-          _this.$message.error("Server Error");
-          _this.loading = false;
-        });
+          this.loading = false;
+        }, 500);
+      }
     },
     reset(value) {
       if (value === "1") {
-        this.json = mock_1_json;
-        this.initTableData(mock_1_json);
+        this.json = cash_bug_mock_1_json;
+        this.initTableData(cash_bug_mock_1_json);
       } else if (value === "2") {
-        this.json = mock_2_json;
-        this.initTableData(mock_2_json);
-      } else {
-        this.json = mock_3_json;
-        this.initTableData(mock_3_json);
+        this.json = cash_bug_mock_2_json;
+        this.initTableData(cash_bug_mock_2_json);
       }
     },
   },
@@ -224,13 +247,13 @@ export default {
   width: 200px;
   margin-top: 10px;
 }
-.main-header{
+.main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
-.main-table{
+.main-table {
   height: 100%;
   display: flex;
   align-items: center;

@@ -16,18 +16,18 @@
 </template>
 
 <script>
-import AsideBar from "./components/asidebar"
-import HeadBar from "./components/headbar"
+import AsideBar from "./components/asidebar";
+import HeadBar from "./components/headbar";
 export default {
   name: "LayoutIndex",
   components: {
     AsideBar,
-    HeadBar
+    HeadBar,
   },
   props: {},
   data() {
     return {
-        isCollapse:false,
+      isCollapse: false,
     };
   },
   computed: {},
@@ -35,9 +35,9 @@ export default {
   created() {},
   mounted() {},
   methods: {
-      changeCollapse(){
-          this.isCollapse = !this.isCollapse;
-      }
+    changeCollapse() {
+      this.isCollapse = !this.isCollapse;
+    },
   },
 };
 </script>
@@ -57,9 +57,8 @@ export default {
   }
 }
 .main {
-  
   background-color: #e9eef3;
 }
-.footer{
+.footer {
 }
 </style>

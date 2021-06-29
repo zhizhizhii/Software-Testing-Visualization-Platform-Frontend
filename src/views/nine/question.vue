@@ -1,7 +1,7 @@
 <template>
     <div>
-        <span style="font-size:18px;"><b>&nbsp;第九题</b></span>
-      <div style="font-size:12px;">
+        <span style="font-size:24px;"><b>&nbsp;第九题</b></span>
+      <div style="font-size:16px;">
         
       <p >构建ATM系统的state transition diagram, 利用state transition testing方法将其转换成transition tree，而后基于transition tree的路径设计测试用例，要考虑robustness。</p>
 

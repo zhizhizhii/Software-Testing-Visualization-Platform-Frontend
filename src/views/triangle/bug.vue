@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <el-divider content-position="right">测试用例</el-divider>
+    <el-divider content-position="left">测试用例</el-divider>
 
     <div class="main-table">
       <el-table
@@ -46,49 +46,33 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="M"
-          label="销售的主机数量M（台）"
-          width="240"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="I"
-          label="销售的显示器数量I（台）"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="P"
-          label="销售的外设数量P（套）"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="predict"
-          label="预计状态"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="pre_amount"
-          label="预计销售额"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="pre_earn"
-          label="预计佣金"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="S"
-          label="实际状态"
-          align="center"
-        ></el-table-column>
-        <el-table-column
           prop="A"
-          label="实际销售额"
+          label="第一条边的值（a）"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="E"
-          label="实际佣金"
+          prop="B"
+          label="第二条边的值（b）"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="C"
+          label="第三条边的值（c）"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="expectation"
+          label="程序预期输出"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="actual"
+          label="程序实际输出"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="info"
+          label="程序运行信息"
           align="center"
         ></el-table-column>
         <el-table-column prop="state" label="测试结果" align="center">
@@ -112,24 +96,27 @@
 </template>
 
 <script>
-import mock_1_json from "@/mock/sales/sales_mock.json";
-import { testsales } from "@/api/salestest.js";
+import triangle_mock_bug_1_json from "@/mock/triangle/triangle_mock_bug_1.json";
+
 export default {
   name: "SystemTest",
   components: {},
   props: ["parentHeight"],
   data() {
     return {
-      options: [{ value: "1", label: "健壮性边界分析法" }],
+      options: [{ value: "1", label: "bug_v1_无法处理空字符串" }],
       value: "1",
       tableData: [],
       loading: false,
       classState: [],
+      inputData: {
+        triangle_test_list: triangle_mock_bug_1_json,
+      },
     };
   },
   computed: {
     tableHeight() {
-      return this.parentHeight - 260 > 650 ? 650 : this.parentHeight - 260;
+      return this.parentHeight - 260 > 700 ? 700 : this.parentHeight - 260;
     },
   },
   watch: {
@@ -142,7 +129,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.initTableData(mock_1_json);
+    this.initTableData(triangle_mock_bug_1_json);
   },
   methods: {
     initTableData(json) {
@@ -153,9 +140,8 @@ export default {
         for (let key in element) {
           newData[key] = element[key];
         }
-        newData["A"] = "";
-        newData["S"] = "";
-        newData["E"] = "";
+        newData["actual"] = "";
+        newData["info"] = "";
         newData["state"] = null;
         this.tableData.push(newData);
       });
@@ -164,45 +150,32 @@ export default {
       return this.classState[rowIndex];
     },
     doTest() {
-      let newData = {
-        sales_test_list: mock_1_json,
-      };
-      const _this = this;
       this.loading = true;
-      testsales(newData)
-        .then((res) => {
-          _this.tableData.forEach((item, index) => {
-            let responseObject = res.data.test_result[index];
-            item.A = responseObject.amount;
-            item.S = responseObject.actual;
-            item.E = responseObject.earn;
-            item.state = item.A == item.pre_amount ? true : false;
-            item.time = responseObject.test_time;
-            _this.classState[index] = item["state"]
-              ? "success-row"
-              : "error-row";
-          });
-          this.$message({
-            message: "测试成功",
-            type: "success",
-          });
-          _this.loading = false;
-        })
-        .catch((err) => {
-          _this.$message.error("Server Error");
-          _this.loading = false;
+      setTimeout(() => {
+        this.loading = false;
+        let mock_data = [{
+          id: "TS1",
+          actual: "Internal Server Error!",
+          info: "Internal Server Error!",
+          test_time: "Internal Server Error!",
+        }];
+        this.tableData.forEach((item, index) => {
+          let responseObject = mock_data[index];
+          console.log(responseObject);
+          item.actual = responseObject.actual;
+          item.info = responseObject.info;
+          item.state = item.expectation == item.actual ? true : false;
+          item.time = responseObject.test_time;
+          this.classState[index] = item["state"] ? "success-row" : "error-row";
         });
+      }, 500);
     },
     reset(value) {
       if (value === "1") {
-        this.json = mock_1_json;
-        this.initTableData(mock_1_json);
-      } else if (value === "2") {
-        this.json = mock_2_json;
-        this.initTableData(mock_2_json);
-      } else {
-        this.json = mock_3_json;
-        this.initTableData(mock_3_json);
+        this.initTableData(triangle_mock_bug_1_json);
+        this.inputData = {
+          triangle_test_list: triangle_mock_bug_1_json,
+        };
       }
     },
   },
@@ -224,13 +197,13 @@ export default {
   width: 200px;
   margin-top: 10px;
 }
-.main-header{
+.main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
-.main-table{
+.main-table {
   height: 100%;
   display: flex;
   align-items: center;

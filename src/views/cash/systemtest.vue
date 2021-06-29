@@ -90,6 +90,7 @@
 import mock_1_json from "@/mock/cash/cash_mock_1.json";
 import mock_2_json from "@/mock/cash/cash_mock_2.json";
 import mock_3_json from "@/mock/cash/cash_mock_3.json";
+import mock_4_json from "@/mock/cash/cash_mock_4.json";
 import { testcash } from "@/api/cashtest.js";
 export default {
   name: "SystemTest",
@@ -98,9 +99,10 @@ export default {
   data() {
     return {
       options: [
-        {value: "1",label: "边界值法",},
-        {value: "2",label: "等价类法",},
-        {value: "3",label: "决策表法",},
+        {value: "1",label: "健壮性边界值法",},
+        {value: "2",label: "强健壮等价类测试",},
+        {value: "3",label: "扩展条目决策表生成测试用例",},
+        {value: "4",label: "综合最优用例",},
       ],
       value: "1",
       tableData: [],
@@ -187,9 +189,13 @@ export default {
           this.json = mock_2_json;
           this.initTableData(mock_2_json);
         }
-        else{
+        else if(value ==="3"){
           this.json = mock_3_json;
           this.initTableData(mock_3_json);
+        }
+        else{
+                    this.json = mock_4_json;
+          this.initTableData(mock_4_json);
         }
     }
   },
